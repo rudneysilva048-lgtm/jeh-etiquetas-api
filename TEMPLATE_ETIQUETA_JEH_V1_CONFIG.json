@@ -1,59 +1,59 @@
 {
   "template": "JEH_ETIQUETA_V1",
   "canvas": {
-    "width": 1536,
-    "height": 1051
+    "width": 738,
+    "height": 1600
   },
   "background": "TEMPLATE_ETIQUETA_JEH_V1_BASE.jpg",
   "fixed_elements": "Everything already present in the background image is immutable.",
   "variable_fields": {
     "protein_title": {
-      "x_center": 530,
-      "y": 405,
-      "max_width": 900,
+      "x_center": 312,
+      "y": 533,
+      "max_width": 432,
       "font": "PTN77F.ttf",
-      "size": 70,
+      "size": 34,
       "anchor": "mm",
       "align": "center"
     },
     "ingredient_1": {
-      "x": 245,
-      "y": 525,
-      "max_width": 740,
+      "x": 118,
+      "y": 708,
+      "max_width": 356,
       "font": "PTN77F.ttf",
-      "size": 38,
+      "size": 18,
       "anchor": "lm"
     },
     "ingredient_2": {
-      "x": 245,
-      "y": 630,
-      "max_width": 740,
+      "x": 118,
+      "y": 868,
+      "max_width": 356,
       "font": "PTN77F.ttf",
-      "size": 38,
+      "size": 18,
       "anchor": "lm"
     },
     "ingredient_3": {
-      "x": 245,
-      "y": 735,
-      "max_width": 740,
+      "x": 118,
+      "y": 1028,
+      "max_width": 356,
       "font": "PTN77F.ttf",
-      "size": 38,
+      "size": 18,
       "anchor": "lm"
     },
     "final_weight": {
-      "x": 110,
-      "y": 835,
-      "max_width": 300,
+      "x": 118,
+      "y": 1157,
+      "max_width": 144,
       "font": "PTN77F.ttf",
-      "size": 30,
+      "size": 14,
       "anchor": "lm"
     },
     "manufacturing_date": {
-      "x": 675,
-      "y": 835,
-      "max_width": 300,
+      "x": 118,
+      "y": 1225,
+      "max_width": 144,
       "font": "PTN77F.ttf",
-      "size": 30,
+      "size": 14,
       "anchor": "lm"
     }
   }
