@@ -1,4 +1,4 @@
-﻿{
+{
   "template": "JEH_ETIQUETA_V1",
   "canvas": {
     "width": 1536,
@@ -40,4 +40,5 @@
       "size": 38,
       "anchor": "lm"
     }
-    }
+  }
+}
