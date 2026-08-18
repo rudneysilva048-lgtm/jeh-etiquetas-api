@@ -18,6 +18,37 @@ def health():
     })
 
 
+@app.get("/teste-etiqueta")
+def teste_etiqueta():
+    try:
+        etiqueta_data = {
+            "protein_title": "FRANGO GRELHADO",
+            "ingredient_1": "ARROZ",
+            "ingredient_2": "FEIJAO",
+            "ingredient_3": "BROCOLIS",
+            "final_weight": "350g",
+            "manufacturing_date": datetime.now().strftime("%d/%m/%Y")
+        }
+
+        temp_dir = tempfile.mkdtemp()
+        output_file = Path(temp_dir) / "etiqueta-teste.jpg"
+
+        render(etiqueta_data, output_file)
+
+        return send_file(
+            output_file,
+            mimetype="image/jpeg",
+            as_attachment=False,
+            download_name="etiqueta-teste.jpg"
+        )
+
+    except Exception as e:
+        return jsonify({
+            "erro": "Erro ao gerar etiqueta de teste.",
+            "detalhes": str(e)
+        }), 500
+
+
 @app.post("/gerar-etiqueta")
 def gerar_etiqueta():
     try:
