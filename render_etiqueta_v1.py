@@ -3,7 +3,7 @@ from pathlib import Path
 import json, sys, os
 
 ROOT = Path(__file__).resolve().parent
-CONFIG = json.loads((ROOT / "TEMPLATE_ETIQUETA_JEH_V1_CONFIG.json").read_text(encoding="utf-8"))
+CONFIG = json.loads((ROOT / "TEMPLATE_ETIQUETA_JEH_V1_CONFIG.json").read_text(encoding="utf-8-sig"))
 BASE = ROOT / CONFIG["background"]
 
 def font_path(name):
