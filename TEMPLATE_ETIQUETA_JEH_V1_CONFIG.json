@@ -9,7 +9,7 @@
   "variable_fields": {
     "protein_title": {
       "x_center": 312,
-      "y": 650,
+      "y": 710,
       "max_width": 432,
       "font": "PTN77F.ttf",
       "size": 70,
@@ -26,7 +26,7 @@
     },
     "ingredient_2": {
       "x": 118,
-      "y": 850,
+      "y": 790,
       "max_width": 356,
       "font": "PTN77F.ttf",
       "size": 38,
@@ -34,7 +34,7 @@
     },
     "ingredient_3": {
       "x": 118,
-      "y": 940,
+      "y": 890,
       "max_width": 356,
       "font": "PTN77F.ttf",
       "size": 38,
@@ -42,7 +42,7 @@
     },
     "final_weight": {
       "x": 118,
-      "y": 1060,
+      "y": 990,
       "max_width": 144,
       "font": "PTN77F.ttf",
       "size": 30,
@@ -50,7 +50,7 @@
     },
     "manufacturing_date": {
       "x": 118,
-      "y": 1120,
+      "y": 1060,
       "max_width": 144,
       "font": "PTN77F.ttf",
       "size": 30,
