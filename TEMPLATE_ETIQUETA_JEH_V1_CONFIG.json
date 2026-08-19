@@ -18,10 +18,10 @@
     },
     "ingredient_1": {
       "x": 118,
-      "y": 735,
+      "y": 755,
       "max_width": 356,
       "font": "PTN77F.ttf",
-      "size": 34,
+      "size": 30,
       "anchor": "lm"
     },
     "ingredient_2": {
@@ -29,7 +29,7 @@
       "y": 835,
       "max_width": 356,
       "font": "PTN77F.ttf",
-      "size": 34,
+      "size": 30,
       "anchor": "lm"
     },
     "ingredient_3": {
@@ -37,7 +37,7 @@
       "y": 890,
       "max_width": 356,
       "font": "PTN77F.ttf",
-      "size": 32,
+      "size": 30,
       "anchor": "lm"
     },
     "final_weight": {
