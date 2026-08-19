@@ -8,8 +8,8 @@
   "fixed_elements": "Everything already present in the background is immutable.",
   "variable_fields": {
     "protein_title": {
-      "x_center": 312,
-      "y": 710,
+      "x_center": 295,
+      "y": 725,
       "max_width": 432,
       "font": "PTN77F.ttf",
       "size": 70,
@@ -18,7 +18,7 @@
     },
     "ingredient_1": {
       "x": 118,
-      "y": 770,
+      "y": 710,
       "max_width": 356,
       "font": "PTN77F.ttf",
       "size": 34,
@@ -26,7 +26,7 @@
     },
     "ingredient_2": {
       "x": 118,
-      "y": 790,
+      "y": 820,
       "max_width": 356,
       "font": "PTN77F.ttf",
       "size": 34,
@@ -37,7 +37,7 @@
       "y": 890,
       "max_width": 356,
       "font": "PTN77F.ttf",
-      "size": 34,
+      "size": 32,
       "anchor": "lm"
     },
     "final_weight": {
@@ -49,8 +49,8 @@
       "anchor": "lm"
     },
     "manufacturing_date": {
-      "x": 118,
-      "y": 1020,
+      "x": 95,
+      "y": 990,
       "max_width": 144,
       "font": "PTN77F.ttf",
       "size": 30,
