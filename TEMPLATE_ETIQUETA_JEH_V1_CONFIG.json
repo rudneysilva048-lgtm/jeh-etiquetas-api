@@ -9,7 +9,7 @@
   "variable_fields": {
     "protein_title": {
       "x_center": 312,
-      "y": 600,
+      "y": 650,
       "max_width": 432,
       "font": "PTN77F.ttf",
       "size": 70,
@@ -26,7 +26,7 @@
     },
     "ingredient_2": {
       "x": 118,
-      "y": 930,
+      "y": 850,
       "max_width": 356,
       "font": "PTN77F.ttf",
       "size": 38,
@@ -34,7 +34,7 @@
     },
     "ingredient_3": {
       "x": 118,
-      "y": 1090,
+      "y": 940,
       "max_width": 356,
       "font": "PTN77F.ttf",
       "size": 38,
