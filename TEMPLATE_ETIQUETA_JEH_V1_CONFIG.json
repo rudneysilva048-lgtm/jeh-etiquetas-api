@@ -18,7 +18,7 @@
     },
     "ingredient_1": {
       "x": 118,
-      "y": 710,
+      "y": 735,
       "max_width": 356,
       "font": "PTN77F.ttf",
       "size": 34,
@@ -26,7 +26,7 @@
     },
     "ingredient_2": {
       "x": 118,
-      "y": 820,
+      "y": 835,
       "max_width": 356,
       "font": "PTN77F.ttf",
       "size": 34,
@@ -41,7 +41,7 @@
       "anchor": "lm"
     },
     "final_weight": {
-      "x": 118,
+      "x": 95,
       "y": 950,
       "max_width": 144,
       "font": "PTN77F.ttf",
@@ -49,7 +49,7 @@
       "anchor": "lm"
     },
     "manufacturing_date": {
-      "x": 95,
+      "x": 75,
       "y": 990,
       "max_width": 144,
       "font": "PTN77F.ttf",
