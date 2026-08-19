@@ -8,7 +8,7 @@
   "fixed_elements": "Everything already present in the background is immutable.",
   "variable_fields": {
     "protein_title": {
-      "x_center": 295,
+      "x_center": 285,
       "y": 725,
       "max_width": 432,
       "font": "PTN77F.ttf",
@@ -18,7 +18,7 @@
     },
     "ingredient_1": {
       "x": 118,
-      "y": 755,
+      "y": 785,
       "max_width": 356,
       "font": "PTN77F.ttf",
       "size": 30,
@@ -26,7 +26,7 @@
     },
     "ingredient_2": {
       "x": 118,
-      "y": 835,
+      "y": 850,
       "max_width": 356,
       "font": "PTN77F.ttf",
       "size": 30,
