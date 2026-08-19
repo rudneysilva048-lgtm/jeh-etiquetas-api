@@ -18,7 +18,7 @@
     },
     "ingredient_1": {
       "x": 118,
-      "y": 785,
+      "y": 795,
       "max_width": 356,
       "font": "PTN77F.ttf",
       "size": 30,
@@ -26,7 +26,7 @@
     },
     "ingredient_2": {
       "x": 118,
-      "y": 850,
+      "y": 840,
       "max_width": 356,
       "font": "PTN77F.ttf",
       "size": 30,
