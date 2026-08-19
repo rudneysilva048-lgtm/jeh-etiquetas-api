@@ -21,7 +21,7 @@
       "y": 790,
       "max_width": 356,
       "font": "PTN77F.ttf",
-      "size": 30,
+      "size": 28,
       "anchor": "lm"
     },
     "ingredient_2": {
@@ -29,7 +29,7 @@
       "y": 840,
       "max_width": 356,
       "font": "PTN77F.ttf",
-      "size": 30,
+      "size": 28,
       "anchor": "lm"
     },
     "ingredient_3": {
@@ -37,7 +37,7 @@
       "y": 890,
       "max_width": 356,
       "font": "PTN77F.ttf",
-      "size": 30,
+      "size": 28,
       "anchor": "lm"
     },
     "final_weight": {
