@@ -42,7 +42,7 @@
     },
     "final_weight": {
       "x": 118,
-      "y": 1245,
+      "y": 1060,
       "max_width": 144,
       "font": "PTN77F.ttf",
       "size": 30,
@@ -50,7 +50,7 @@
     },
     "manufacturing_date": {
       "x": 118,
-      "y": 1310,
+      "y": 1120,
       "max_width": 144,
       "font": "PTN77F.ttf",
       "size": 30,
