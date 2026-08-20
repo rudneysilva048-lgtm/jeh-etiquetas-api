@@ -79,6 +79,78 @@ def fit_font(draw, text, max_width, preferred_size):
     )
 
 
+def crop_to_label(img):
+    """
+    Localiza automaticamente a área real da etiqueta dentro do
+    canvas 738x1600, removendo apenas as áreas externas em branco.
+
+    Não altera o desenho da etiqueta.
+    """
+
+    gray = img.convert("L")
+
+    # Pixels abaixo deste valor são considerados conteúdo da etiqueta.
+    threshold = 245
+
+    # Detecta pixels que não são praticamente brancos.
+    mask = gray.point(
+        lambda p: 255 if p < threshold else 0
+    )
+
+    bbox = mask.getbbox()
+
+    # Segurança: se não encontrar conteúdo, mantém a imagem original.
+    if bbox is None:
+        return img
+
+    left, top, right, bottom = bbox
+
+    return img.crop(
+        (left, top, right, bottom)
+    )
+
+
+def prepare_for_printer(img):
+    """
+    Prepara a etiqueta para o aplicativo da impressora.
+
+    Saída obrigatória:
+    100 x 80 pixels.
+
+    A proporção original é preservada.
+    Nunca estica a imagem de forma independente nos eixos.
+    """
+
+    TARGET_WIDTH = 100
+    TARGET_HEIGHT = 80
+
+    # Cria uma tela branca exatamente 100x80.
+    output = Image.new(
+        "RGB",
+        (TARGET_WIDTH, TARGET_HEIGHT),
+        (255, 255, 255)
+    )
+
+    # Redimensiona mantendo a proporção.
+    copy = img.copy()
+
+    copy.thumbnail(
+        (TARGET_WIDTH, TARGET_HEIGHT),
+        Image.Resampling.LANCZOS
+    )
+
+    # Centraliza a etiqueta.
+    x = (TARGET_WIDTH - copy.width) // 2
+    y = (TARGET_HEIGHT - copy.height) // 2
+
+    output.paste(
+        copy,
+        (x, y)
+    )
+
+    return output
+
+
 def render(data, output):
 
     img = Image.open(BASE).convert("RGB")
@@ -218,13 +290,23 @@ def render(data, output):
         )
 
     # ---------------------------------------------------------
+    # PREPARAÇÃO PARA IMPRESSORA
+    # ---------------------------------------------------------
+
+    # 1. Remove o espaço branco externo do canvas original.
+    label = crop_to_label(img)
+
+    # 2. Converte a etiqueta para exatamente 100x80.
+    final_image = prepare_for_printer(label)
+
+    # ---------------------------------------------------------
     # SALVAR
     # ---------------------------------------------------------
 
-    img.save(
+    final_image.save(
         output,
-        quality=100,
-        subsampling=0
+        format="PNG",
+        optimize=True
     )
 
 
