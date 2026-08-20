@@ -81,25 +81,29 @@ def fit_font(draw, text, max_width, preferred_size):
 
 def crop_to_label(img):
     """
-    Localiza automaticamente a área real da etiqueta dentro do
-    canvas 738x1600, removendo apenas as áreas externas em branco.
+    Remove somente o espaço externo em branco do canvas original.
 
-    Não altera o desenho da etiqueta.
+    O canvas original possui 738x1600.
+    A função encontra automaticamente a área que contém
+    a arte da etiqueta e remove o excesso de branco externo.
+
+    Não altera os textos nem os elementos da etiqueta.
     """
 
     gray = img.convert("L")
 
-    # Pixels abaixo deste valor são considerados conteúdo da etiqueta.
+    # Considera como conteúdo qualquer pixel
+    # que não seja praticamente branco.
     threshold = 245
 
-    # Detecta pixels que não são praticamente brancos.
     mask = gray.point(
         lambda p: 255 if p < threshold else 0
     )
 
     bbox = mask.getbbox()
 
-    # Segurança: se não encontrar conteúdo, mantém a imagem original.
+    # Segurança:
+    # se não encontrar conteúdo, mantém a imagem original.
     if bbox is None:
         return img
 
@@ -112,43 +116,24 @@ def crop_to_label(img):
 
 def prepare_for_printer(img):
     """
-    Prepara a etiqueta para o aplicativo da impressora.
+    Prepara a etiqueta para impressão.
 
-    Saída obrigatória:
-    100 x 80 pixels.
+    A área final possui proporção 5:4,
+    correspondente a 100 x 80 mm.
 
-    A proporção original é preservada.
-    Nunca estica a imagem de forma independente nos eixos.
+    O arquivo final é gerado em 480 x 384 px,
+    mantendo a etiqueta ocupando toda a área.
     """
 
-    TARGET_WIDTH = 100
-    TARGET_HEIGHT = 80
+    TARGET_WIDTH = 480
+    TARGET_HEIGHT = 384
 
-    # Cria uma tela branca exatamente 100x80.
-    output = Image.new(
-        "RGB",
-        (TARGET_WIDTH, TARGET_HEIGHT),
-        (255, 255, 255)
-    )
-
-    # Redimensiona mantendo a proporção.
-    copy = img.copy()
-
-    copy.thumbnail(
+    final_image = img.resize(
         (TARGET_WIDTH, TARGET_HEIGHT),
         Image.Resampling.LANCZOS
     )
 
-    # Centraliza a etiqueta.
-    x = (TARGET_WIDTH - copy.width) // 2
-    y = (TARGET_HEIGHT - copy.height) // 2
-
-    output.paste(
-        copy,
-        (x, y)
-    )
-
-    return output
+    return final_image
 
 
 def render(data, output):
@@ -293,10 +278,10 @@ def render(data, output):
     # PREPARAÇÃO PARA IMPRESSORA
     # ---------------------------------------------------------
 
-    # 1. Remove o espaço branco externo do canvas original.
+    # Remove o espaço branco externo do canvas original.
     label = crop_to_label(img)
 
-    # 2. Converte a etiqueta para exatamente 100x80.
+    # Converte a etiqueta para proporção 5:4.
     final_image = prepare_for_printer(label)
 
     # ---------------------------------------------------------
