@@ -81,37 +81,30 @@ def fit_font(draw, text, max_width, preferred_size):
 
 def crop_to_label(img):
     """
-    Remove somente o espaço externo em branco do canvas original.
+    Remove o espaço branco externo do canvas original,
+    mantendo somente a área da etiqueta.
 
-    O canvas original possui 738x1600.
-    A função encontra automaticamente a área que contém
-    a arte da etiqueta e remove o excesso de branco externo.
-
-    Não altera os textos nem os elementos da etiqueta.
+    O corte é feito automaticamente com base nos pixels
+    que diferem do fundo branco.
     """
 
-    gray = img.convert("L")
+    rgb = img.convert("RGB")
 
-    # Considera como conteúdo qualquer pixel
-    # que não seja praticamente branco.
-    threshold = 245
+    # Converte para escala de cinza
+    gray = rgb.convert("L")
 
+    # Considera como conteúdo tudo que não for praticamente branco.
+    # O limite evita que pequenas variações do fundo sejam consideradas.
     mask = gray.point(
-        lambda p: 255 if p < threshold else 0
+        lambda p: 0 if p > 245 else 255
     )
 
     bbox = mask.getbbox()
 
-    # Segurança:
-    # se não encontrar conteúdo, mantém a imagem original.
     if bbox is None:
         return img
 
-    left, top, right, bottom = bbox
-
-    return img.crop(
-        (left, top, right, bottom)
-    )
+    return img.crop(bbox)
 
 
 def prepare_for_printer(img):
