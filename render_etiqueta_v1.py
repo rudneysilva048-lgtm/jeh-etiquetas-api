@@ -79,6 +79,131 @@ def fit_font(draw, text, max_width, preferred_size):
     )
 
 
+def crop_to_label(img):
+    """
+    Localiza automaticamente a área real da etiqueta dentro do
+    canvas original, removendo apenas as áreas externas em branco.
+
+    Não altera o desenho da etiqueta.
+    """
+
+    gray = img.convert("L")
+
+    # Pixels abaixo deste valor são considerados conteúdo da etiqueta.
+    threshold = 245
+
+    # Detecta pixels que não são praticamente brancos.
+    mask = gray.point(
+        lambda p: 255 if p < threshold else 0
+    )
+
+    bbox = mask.getbbox()
+
+    # Segurança: se não encontrar conteúdo, mantém a imagem original.
+    if bbox is None:
+        return img
+
+    left, top, right, bottom = bbox
+
+    return img.crop(
+        (
+            left,
+            top,
+            right,
+            bottom
+        )
+    )
+
+
+def prepare_for_printer(img):
+    """
+    Prepara a etiqueta para o aplicativo da impressora.
+
+    Saída obrigatória:
+    100 x 80 pixels.
+
+    Proporção final:
+    5:4.
+
+    A imagem mantém sua proporção original.
+    Quando necessário, é feito apenas um recorte central
+    para adequar a imagem ao formato 5:4.
+
+    Nunca estica a imagem de forma independente nos eixos.
+    """
+
+    TARGET_WIDTH = 100
+    TARGET_HEIGHT = 80
+
+    target_ratio = TARGET_WIDTH / TARGET_HEIGHT
+
+    source_width, source_height = img.size
+    source_ratio = source_width / source_height
+
+    # ---------------------------------------------------------
+    # AJUSTE DA PROPORÇÃO PARA 5:4
+    # ---------------------------------------------------------
+
+    if source_ratio > target_ratio:
+
+        # Imagem mais larga que 5:4.
+        # Mantém a altura e corta somente as laterais.
+
+        new_width = int(
+            source_height * target_ratio
+        )
+
+        left = (
+            source_width - new_width
+        ) // 2
+
+        img = img.crop(
+            (
+                left,
+                0,
+                left + new_width,
+                source_height
+            )
+        )
+
+    elif source_ratio < target_ratio:
+
+        # Imagem mais alta que 5:4.
+        # Mantém a largura e corta somente
+        # as partes superior/inferior.
+
+        new_height = int(
+            source_width / target_ratio
+        )
+
+        top = (
+            source_height - new_height
+        ) // 2
+
+        img = img.crop(
+            (
+                0,
+                top,
+                source_width,
+                top + new_height
+            )
+        )
+
+    # ---------------------------------------------------------
+    # REDIMENSIONAMENTO FINAL
+    # ---------------------------------------------------------
+
+    final_image = img.resize(
+        (
+            TARGET_WIDTH,
+            TARGET_HEIGHT
+        ),
+        Image.Resampling.LANCZOS
+    )
+
+    return final_image
+
+
 def render(data, output):
 
     img = Image.open(BASE).convert("RGB")
@@ -218,13 +343,23 @@ def render(data, output):
         )
 
     # ---------------------------------------------------------
+    # PREPARAÇÃO PARA IMPRESSORA
+    # ---------------------------------------------------------
+
+    # Remove o espaço branco externo do canvas original.
+    label = crop_to_label(img)
+
+    # Converte a etiqueta para proporção 5:4.
+    final_image = prepare_for_printer(label)
+
+    # ---------------------------------------------------------
     # SALVAR
     # ---------------------------------------------------------
 
-    img.save(
+    final_image.save(
         output,
-        quality=100,
-        subsampling=0
+        format="PNG",
+        optimize=True
     )
 
 
