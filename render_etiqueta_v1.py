@@ -81,10 +81,44 @@ def fit_font(draw, text, max_width, preferred_size):
 
 def render(data, output):
 
-    img = Image.open(BASE).convert("RGB")
+    # ---------------------------------------------------------
+    # ÁREA REAL DA ETIQUETA
+    # Remove o espaço branco externo da imagem-base.
+    # ---------------------------------------------------------
+
+    source = Image.open(BASE).convert("RGB")
+
+    crop_box = (
+        0,
+        546,
+        738,
+        1053
+    )
+
+    img = source.crop(crop_box)
+
+    # ---------------------------------------------------------
+    # DIMENSÃO FINAL DA IMAGEM
+    # 100 x 80 mm / proporção 5:4
+    # ---------------------------------------------------------
+
+    FINAL_WIDTH = 1402
+    FINAL_HEIGHT = 1122
+
+    # Mantém a arte inteira e adapta somente a dimensão final.
+    img = img.resize(
+        (FINAL_WIDTH, FINAL_HEIGHT),
+        Image.Resampling.LANCZOS
+    )
+
     draw = ImageDraw.Draw(img)
 
     fields = CONFIG["variable_fields"]
+
+    # Fatores usados para transportar as coordenadas
+    # existentes da imagem original para a nova dimensão.
+    SCALE_X = FINAL_WIDTH / 738
+    SCALE_Y = FINAL_HEIGHT / 507
 
     # ---------------------------------------------------------
     # PROTEÍNA
@@ -101,14 +135,14 @@ def render(data, output):
         f = fit_font(
             draw,
             title,
-            spec["max_width"],
-            spec["size"]
+            int(spec["max_width"] * SCALE_X),
+            int(spec["size"] * SCALE_X)
         )
 
         draw.text(
             (
-                spec["x_center"],
-                spec["y"]
+                int(spec["x_center"] * SCALE_X),
+                int((spec["y"] - 546) * SCALE_Y)
             ),
             title,
             font=f,
@@ -142,14 +176,14 @@ def render(data, output):
         f = fit_font(
             draw,
             text,
-            spec["max_width"],
-            spec["size"]
+            int(spec["max_width"] * SCALE_X),
+            int(spec["size"] * SCALE_X)
         )
 
         draw.text(
             (
-                spec["x"],
-                spec["y"]
+                int(spec["x"] * SCALE_X),
+                int((spec["y"] - 546) * SCALE_Y)
             ),
             text,
             font=f,
@@ -172,14 +206,14 @@ def render(data, output):
         f = fit_font(
             draw,
             fw,
-            spec["max_width"],
-            spec["size"]
+            int(spec["max_width"] * SCALE_X),
+            int(spec["size"] * SCALE_X)
         )
 
         draw.text(
             (
-                spec["x"],
-                spec["y"]
+                int(spec["x"] * SCALE_X),
+                int((spec["y"] - 546) * SCALE_Y)
             ),
             fw,
             font=f,
@@ -202,14 +236,14 @@ def render(data, output):
         f = fit_font(
             draw,
             date,
-            spec["max_width"],
-            spec["size"]
+            int(spec["max_width"] * SCALE_X),
+            int(spec["size"] * SCALE_X)
         )
 
         draw.text(
             (
-                spec["x"],
-                spec["y"]
+                int(spec["x"] * SCALE_X),
+                int((spec["y"] - 546) * SCALE_Y)
             ),
             date,
             font=f,
@@ -224,7 +258,8 @@ def render(data, output):
     img.save(
         output,
         quality=100,
-        subsampling=0
+        subsampling=0,
+        dpi=(300, 300)
     )
 
 
