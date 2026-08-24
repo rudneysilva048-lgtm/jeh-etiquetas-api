@@ -4,7 +4,7 @@
     "width": 738,
     "height": 1600
   },
-  "background": "TEMPLATE_ETIQUETA_JEH_V1_BASE.jpg",
+  "background": "TEMPLATE_ETIQUETA_JEH_V1_BASE_HD.png",
   "fixed_elements": "Everything already present in the background is immutable.",
   "variable_fields": {
     "protein_title": {
