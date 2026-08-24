@@ -127,7 +127,7 @@ def render(data, output):
     )
 )
 
-draw = ImageDraw.Draw(img)
+    draw = ImageDraw.Draw(img)
 
     fields = CONFIG["variable_fields"]
 
