@@ -89,9 +89,9 @@ def render(data, output):
     source = Image.open(BASE).convert("RGB")
 
     crop_box = (
-        276,
+        176,
         2204,
-        2776,
+        2676,
         4204
     )
 
@@ -115,7 +115,7 @@ def render(data, output):
     ImageFilter.UnsharpMask(
         radius=1.2,
         percent=600,
-        threshold=3
+        threshold=0
     )
 )
     
