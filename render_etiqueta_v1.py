@@ -1,4 +1,4 @@
-from PIL import Image, ImageDraw, ImageFont, ImageFilter
+from PIL import Image, ImageDraw, ImageFont
 from pathlib import Path
 from datetime import datetime
 import json
@@ -111,13 +111,6 @@ def render(data, output):
         Image.Resampling.LANCZOS
     )
 
-    img = img.filter(
-    ImageFilter.UnsharpMask(
-        radius=1.2,
-        percent=160,
-        threshold=2
-    )
-)
     draw = ImageDraw.Draw(img)
 
     fields = CONFIG["variable_fields"]
