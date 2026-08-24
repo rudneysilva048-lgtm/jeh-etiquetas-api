@@ -258,7 +258,7 @@ def render(data, output):
 
         draw.text(
             (
-                int(spec["x"] * SCALE_X),
+                int(spec["x"] - 10) * SCALE_X),
                 int((spec["y"] - 546) * SCALE_Y)
             ),
             date,
