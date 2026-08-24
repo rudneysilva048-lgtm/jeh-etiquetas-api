@@ -118,7 +118,16 @@ def render(data, output):
         threshold=1
     )
 )
-    draw = ImageDraw.Draw(img)
+    
+    img = img.filter(
+    ImageFilter.UnsharpMask(
+        radius=0.6,
+        percent=100,
+        threshold=1
+    )
+)
+
+draw = ImageDraw.Draw(img)
 
     fields = CONFIG["variable_fields"]
 
