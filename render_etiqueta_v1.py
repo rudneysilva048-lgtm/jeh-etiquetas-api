@@ -89,9 +89,9 @@ def render(data, output):
     source = Image.open(BASE).convert("RGB")
 
     crop_box = (
-        8,
+        251,
         2224,
-        2944,
+        2701,
         4184
     )
 
