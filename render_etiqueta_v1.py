@@ -91,7 +91,7 @@ def render(data, output):
     crop_box = (
         176,
         2204,
-        2676,
+        2876,
         4204
     )
 
