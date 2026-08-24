@@ -121,8 +121,8 @@ def render(data, output):
     
     img = img.filter(
     ImageFilter.UnsharpMask(
-        radius=0.6,
-        percent=100,
+        radius=0.8,
+        percent=200,
         threshold=1
     )
 )
